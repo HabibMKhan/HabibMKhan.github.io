@@ -1,0 +1,49 @@
+
+<div class="container account-form">
+  <form name="form" novalidate="novalidate">
+    <div class="input-row">
+      <input type="text" placeholder="First name" onfocus="this.placeholder = ''" required="required" ng-model="user.firstName" name="uFirstName" class="form-control input-field"/>
+      <div ng-show="form.$submitted || form.uFirstName.$touched">
+        <div ng-show="form.uFirstName.$error.required" class="validation-error">Please enter first name</div>
+      </div>
+    </div>
+    <div class="input-row">
+      <input type="text" placeholder="Last name" onfocus="this.placeholder = ''" required="required" ng-model="user.lastName" name="uLastName" class="form-control input-field"/>
+      <div ng-show="form.$submitted || form.uLastName.$touched">
+        <div ng-show="form.uLastName.$error.required" class="validation-error">Please enter last name</div>
+      </div>
+    </div>
+    <div class="input-row">
+      <input type="email" required="required" placeholder="Email address" onfocus="this.placeholder = ''" ng-model="user.email" name="uEmail" class="form-control input-field"/>
+      <div ng-show="form.$submitted || form.uEmail.$touched">
+        <div ng-show="form.uEmail.$error.required" class="validation-error">Please enter an email address</div>
+        <div ng-show="form.uEmail.$error.email" class="validation-error">Invalid email address</div>
+      </div>
+    </div>
+    <div class="input-row">
+      <input type="email" placeholder="Confirm email address" onfocus="this.placeholder = ''" ng-model="user.confirmEmail" name="uConfirmEmail" required="required" confirm-input="user.email" class="form-control input-field"/>
+      <div ng-show="form.$submitted || form.uConfirmEmail.$touched">
+        <div ng-show="form.uConfirmEmail.$error.required || form.uConfirmEmail.$error.confirmed " class="validation-error">Please confirm your email address</div>
+      </div>
+    </div>
+    <div class="input-row">
+      <input type="password" placeholder="Password" onfocus="this.placeholder = ''" ng-model="user.password" name="uPassword" required="" ng-minlength="6" class="form-control input-field"/>
+      <div ng-show="form.$submitted || form.uPassword.$touched">
+        <div ng-show="form.uPassword.$error.required" class="validation-error">Please enter a password</div>
+        <div ng-show="form.uPassword.$error.minlength" class="validation-error">Please use 6 or more characters</div>
+      </div>
+    </div>
+    <div class="input-row">
+      <input type="password" placeholder="Confirm password" onfocus="this.placeholder = ''" ng-model="user.confirmPassword" required="required" name="uConfirmPassword" confirm-input="user.password" class="form-control input-field"/>
+      <div ng-show="form.$submitted || form.uConfirmPassword.$touched">
+        <div ng-show="form.uConfirmPassword.$error.required || form.uConfirmPassword.$error.confirmed " class="validation-error">Please confirm your password</div>
+      </div>
+    </div>
+    <div class="input-row">
+      <button ng-click="submit(form)" class="btn btn-primary btn-block">REGISTER</button>
+    </div>
+    <div class="input-row">
+      <p class="login-help">Already have an account? &nbsp<a href="#/login">Login here</a></p>
+    </div>
+  </form>
+</div>
