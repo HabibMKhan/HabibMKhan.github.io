@@ -11,12 +11,12 @@
                 url: '/',
                 views: {
                     'header': {
-                        templateUrl: 'views/shared/_header.html',
+                        templateUrl: './views/shared/_header.html',
                         controller: 'headerController'
                     },
                     'main': {
                         controller: 'homeController',
-                        templateUrl: 'views/account/home.html'
+                        templateUrl: './views/account/home.html'
                     }
                 },
                 cache: false,
