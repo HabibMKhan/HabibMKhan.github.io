@@ -11,7 +11,7 @@
                 url: '/',
                 views: {
                     'header': {
-                        templateUrl: './views/shared/header.html',
+                        templateUrl: './views/account/header.html',
                         controller: 'headerController'
                     },
                     'main': {
