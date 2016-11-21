@@ -1,0 +1,22 @@
+
+<div id="main" ng-controller="charController">
+  <div class="enemy--name">{{enemyName}}</div><img ng-src="{{eImgUrl}}" class="char enemy enemy--battle"/><img ng-src="{{imgUrl}}" class="char char--battle"/>
+  <div class="hp-bar__char">
+    <progress value="{{charHp}}" max="{{charMax}}" class="hp-bar hp-bar__char"></progress><span class="hp-description">Character HP: {{charHp}} Character MAX: {{charMax}}</span>
+  </div>
+  <div class="hp-bar__enemy">
+    <progress value="{{enemyHp}}" max="{{enemyMax}}" class="hp-bar hp-bar__enemy"></progress><span class="hp-description">Character HP: {{enemyHp}} Character MAX: {{enemyMax}}</span>
+  </div>
+  <div ng-show="hit &amp;&amp; !battleStart" class="hit-text">Your attack landed! {{damageDealt}} damage dealt!</div>
+  <div ng-show="!hit &amp;&amp; !battleStart" class="hit-text">Your attack missed!</div>
+  <div ng-show="enemyHit &amp;&amp; !battleStart" class="enemyHit-text">Enemy attack landed! {{damageTaken}} damage taken!</div>
+  <div ng-show="!enemyHit &amp;&amp; !battleStart" class="enemyHit-text">Enemy attack missed!</div>
+  <div ui-sref="village" ng-show="((battleOutcome === 'Win') || (battleOutcome === 'Lose'))" class="battle__outcome">{{battleOutcome}}
+    <div class="return-village">Click to return to village!</div>
+  </div><a id="surveyLink" href="https://goo.gl/forms/8w7s73XuloytxelI3" target="_blank">Survey after you're done playing :)</a>
+  <button ui-sref="char" class="back-char btn"> <a ui-sref="char">Back to Character selection</a></button>
+  <button style="margin-top:150px;" ui-sref="home" class="back-home btn"> <a ui-sref="home">Back home</a></button>
+  <div id="battleMoves" ng-hide="((battleOutcome === 'Win') || (battleOutcome === 'Lose'))">
+    <div ng-click="abilityUsed($index)" ng-repeat="move in charAbilities" class="battleMoves__ability">{{move.name}}</div>
+  </div>
+</div>

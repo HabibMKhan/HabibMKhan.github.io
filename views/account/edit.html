@@ -1,0 +1,75 @@
+
+<div id="main" ng-controller="editController" class="edit-page">
+  <div id="edit-title">{{editTitle}}</div>
+  <div id="stat-edit" ng-show="toggle==='Edit Moves'">
+    <div class="stat-edit__stat-types">
+      <div class="stat-edit__stat-type">STRENGTH: {{strength}}</div>
+      <div class="stat-edit__stat-type">SPEED: {{speed}}</div>
+      <div class="stat-edit__stat-type">MAXSTAT {{maxstat}}</div>
+      <div class="stat-edit__stat-type--tip">Spend STRENGTH and SPEED points, but don't exceed MAXSTAT.</div>
+    </div>
+    <div class="stat-edit__stat-label">Toughness:</div>
+    <div class="stat-edit__stat--javascript">let sessionStorage.toughness = </div>
+    <input ng-change="toughnessAdjust()" min="0" ng-max="maxstat" type="number" ng-model="toughness" placeholder="e.g., 1, 2, 3" class="stat-edit__stat-input"/>
+    <div ng-if="toughness === undefined" class="stat-edit__move-invalid">Error: Toughness greater than max.</div>
+    <div class="stat-edit__stat-label">Power:</div>
+    <div class="stat-edit__stat--javascript">let sessionStorage.power = </div>
+    <input ng-change="powerAdjust()" min="0" ng-max="maxstat" type="number" ng-model="power" placeholder="e.g., 1, 2, 3" class="stat-edit__stat-input"/>
+    <div ng-if="power === undefined" class="stat-edit__move-invalid">Error: Power greater than max.</div>
+    <div class="stat-edit__stat-label">Evasion:</div>
+    <div class="stat-edit__stat--javascript">let sessionStorage.evasion = </div>
+    <input ng-change="evasionAdjust()" min="0" ng-max="maxstat" type="number" ng-model="evasion" placeholder="e.g., 1, 2, 3" class="stat-edit__stat-input"/>
+    <div ng-if="evasion === undefined" class="stat-edit__move-invalid">Error: Evasion greater than max.</div>
+    <div class="stat-edit__stat-label">Accuracy:</div>
+    <div class="stat-edit__stat--javascript">let sessionStorage.accuracy = </div>
+    <input ng-change="accuracyAdjust()" min="0" ng-max="maxstat" type="number" ng-model="accuracy" placeholder="e.g., 1, 2, 3" class="stat-edit__stat-input"/>
+    <div ng-if="accuracy === undefined" class="stat-edit__move-invalid">Error: Accuracy greater than max.</div>
+  </div>
+  <div id="move-edit" ng-show="toggle==='Edit Stats'">
+    <div class="move-edit__available__title"> <span ng-if="abilityCount &gt; 0">Choose {{abilityCount}} ability. </span><span>{{moveCount}} abilities currently selected. </span><span class="default-move__text">Default Fixed (2): (Throw Rock & Sand)</span></div>
+    <div class="move-edit__moves--available">
+      <div ng-class="(moves[chartype][$index].name === ability) ? 'selected' : 'unselected'" ng-click="selectMove($index)" ng-repeat="move in moves[chartype]" class="move-edit__move">{{move.name}}
+        <div class="move-edit__move-damage">DAMAGE: {{move.damage}}</div>
+        <div ng-show="move.toughness&gt;0" class="move-edit__move-stat">Toughness: +{{move.toughness}}</div>
+        <div ng-show="move.power&gt;0" class="move-edit__move-stat">Power: +{{move.power}}</div>
+        <div ng-show="move.evasion&gt;0" class="move-edit__move-stat">Evasion: +{{move.evasion}}</div>
+        <div ng-show="move.accuracy&gt;0" class="move-edit__move-stat">Accuracy: +{{move.accuracy}}</div>
+        <div ng-show="(moves[chartype][$index].name !== ability)" class="selectMove">Click to Select this Move</div>
+      </div>
+      <div ng-repeat="move in moves['allChars']" class="move-edit__move--default">{{move.name}}
+        <div class="move-edit__move-damage">DAMAGE: {{move.damage}}</div>
+        <div ng-show="move.toughness&gt;0" class="move-edit__move-stat">Toughness: +{{move.toughness}}</div>
+        <div ng-show="move.power&gt;0" class="move-edit__move-stat">Power: +{{move.power}}</div>
+        <div ng-show="move.evasion&gt;0" class="move-edit__move-stat">Evasion: +{{move.evasion}}</div>
+        <div ng-show="move.accuracy&gt;0" class="move-edit__move-stat">Accuracy: +{{move.accuracy}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="toggle-edit">
+    <button ng-click="toggleEdit()" class="toggle-edit__button">{{toggle}}</button>
+  </div>
+  <div ng-show="editCompleted" class="go-village">
+    <button ng-click="setStats()" ui-sref="village" class="btn-village">Go protect the village!</button>
+  </div>
+  <div id="stat-summary" class="stat-summary">
+    <div class="stat-summary__name-label">Name:</div>
+    <div class="stat-summary__name-value stat--javascript">>> {{userName}}</div>
+    <div class="stat-summary__type-label">Class:</div>
+    <div class="stat-summary__type-value stat--javascript">>> {{chartype}}</div>
+    <div class="stat-summary__type-label">Subclass:</div>
+    <div class="stat-summary__type-value stat--javascript">>> {{subtype}}</div>
+    <div class="stat-summary__stat__heading">Stats</div>
+    <div class="stat-summary__name-label">Toughness:</div>
+    <div class="stat-summary__name-value stat--javascript">>> {{toughness}}</div>
+    <div class="stat-summary__type-label">Power:</div>
+    <div class="stat-summary__type-value stat--javascript">>> {{power}}</div>
+    <div class="stat-summary__type-label">Evasion:</div>
+    <div class="stat-summary__type-value stat--javascript">>> {{evasion}}</div>
+    <div class="stat-summary__type-label">Accuracy:</div>
+    <div class="stat-summary__type-value stat--javascript">>> {{accuracy}}</div>
+    <div class="stat-summary__type-label">Abilities:</div>
+    <div ng-repeat="move in charMoves" class="stat-summary__type-value stat--javascript">>> {{move.name}}</div>
+    <button ui-sref="char" class="back-char btn"> <a ui-sref="char">Back to Character selection</a></button>
+    <button style="margin-top:150px;" ui-sref="home" class="back-home btn"> <a ui-sref="home">Back home</a></button><img ng-src="{{imgUrl}}" class="char"/>
+  </div>
+</div>

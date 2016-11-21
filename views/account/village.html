@@ -1,0 +1,40 @@
+
+<div id="main" ng-controller="villageController" class="main__village">
+  <div id="everything">
+    <div class="villageWorld">Village World</div>
+    <div id="instruction" class="village">You have {{enemies.length - enemiesDefeated.length}} enemies left to defeat!</div>
+    <div class="villageAreas">
+      <div ng-hide="enemyHide[$index]" ng-click="enemySet(e)" ng-repeat="e in enemies" ui-sref="battle" class="villageArea">{{e.name}}</div>
+    </div>
+    <div class="enemies__header enemiesDefeated__header">Enemies Defeated:</div>
+    <div ng-repeat="enemy in enemiesDefeated" class="enemies__body enemiesDefeated__body">enemiesDefeated.push(&quot{{enemy}}&quot);</div>
+    <div class="enemies__body enemiesDefeated__body">>> {{enemiesDefeated}}</div>
+    <div class="enemies__header enemiesLostTo__header">Enemies Lost To:</div>
+    <div ng-repeat="enemy in enemiesLostTo" class="enemies__body enemiesLostTo__body">enemiesDefeated.push(&quot{{enemy}}&quot);</div>
+    <div class="enemies__body enemiesDefeated__body">>> {{enemiesLostTo}}</div>
+    <div id="winConditionMet" ng-click="hideWin=true" ng-hide="hideWin" ng-if="winCondition">YOU WIN!!! You saved the village!</div>
+    <div id="stat-summary" class="stat-summary">
+      <div class="stat-summary__name-label">Name:</div>
+      <div class="stat-summary__name-value stat--javascript">>> {{userName}}</div>
+      <div class="stat-summary__type-label">Class:</div>
+      <div class="stat-summary__type-value stat--javascript">>> {{chartype}}</div>
+      <div class="stat-summary__type-label">Subclass:</div>
+      <div class="stat-summary__type-value stat--javascript">>> {{subtype}}</div>
+      <div class="stat-summary__stat">
+        <div class="stat-summary__stat__heading">Stats</div>
+        <div class="stat-summary__name-label">Toughness:</div>
+        <div class="stat-summary__name-value stat--javascript">>> {{toughness}}</div>
+        <div class="stat-summary__type-label">Power:</div>
+        <div class="stat-summary__type-value stat--javascript">>> {{power}}</div>
+        <div class="stat-summary__type-label">Evasion:</div>
+        <div class="stat-summary__type-value stat--javascript">>> {{evasion}}</div>
+        <div class="stat-summary__type-label">Accuracy:</div>
+        <div class="stat-summary__type-value stat--javascript">>> {{accuracy}}</div>
+        <div class="stat-summary__type-label">Selected Move:</div>
+        <div class="stat-summary__type-value stat--javascript">>> {{selectedMove}}</div>
+      </div>
+    </div>
+  </div><a id="surveyLink" href="https://goo.gl/forms/8w7s73XuloytxelI3" target="_blank" ng-hide="winCondition">Survey after you're done playing :)<a id="surveyLink__win" href="https://goo.gl/forms/8w7s73XuloytxelI3" target="_blank" ng-show="winCondition">Congrats on winning! Fill this survey please :D</a>
+    <button class="back-char btn"> <a ui-sref="char">Back to Character selection</a></button>
+    <button style="margin-top:150px;" class="back-home btn"> <a ui-sref="home">Back home</a></button><img ng-src="{{imgUrl}}" class="char char-village"/></a>
+</div>

@@ -1,0 +1,14 @@
+
+<div id="main" ng-controller="charController">
+  <div id="instruction">{{ instruction }}</div>
+  <div id="tooltip" ng-show="showNarrative">{{ nextNarrative }}</div>
+  <button id="tooltip-button" ng-click="pickRandom()" ui-sref="stats" ng-show="showNarrative">Pick randomly for me!</button>
+  <div id="charSelect">
+    <div ng-repeat="char in characters" ng-click="charClick(char.type)" class="charBox"><img ng-src="{{char.url}}" class="char char-char"/>
+      <div ui-sref="stats" class="char-select">
+        <p class="char-select__text">Select</p>
+      </div>
+    </div>
+  </div>
+  <button id="backNav" ui-sref="home" class="btn"> <a ui-sref="home">Back home</a></button>
+</div>
