@@ -11,7 +11,7 @@
               url: '/battle',
               views: {
                 'header': {
-                  templateUrl: 'views/account/_header.html',
+                  templateUrl: 'views/account/header.html',
                   controller: 'headerController'
                 },
                 'main': {
@@ -25,7 +25,7 @@
               url: '/village',
               views: {
                 'header': {
-                  templateUrl: 'views/account/_header.html',
+                  templateUrl: 'views/account/header.html',
                   controller: 'headerController'
                 },
                 'main': {
@@ -39,7 +39,7 @@
               url: '/stats',
               views: {
                 'header': {
-                  templateUrl: 'views/account/_header.html',
+                  templateUrl: 'views/account/header.html',
                   controller: 'headerController'
                 },
                 'main': {
@@ -53,7 +53,7 @@
               url: '/edit',
               views: {
                 'header': {
-                  templateUrl: 'views/account/_header.html',
+                  templateUrl: 'views/account/header.html',
                   controller: 'headerController'
                 },
                 'main': {
@@ -73,7 +73,7 @@
                 url: '/char',
                 views: {
                     'header': {
-                        templateUrl: 'views/account/_header.html',
+                        templateUrl: 'views/account/header.html',
                         controller: 'headerController'
                     },
                     'main': {
@@ -90,7 +90,7 @@
                 url: '/',
                 views: {
                     'header': {
-                        templateUrl: 'views/account/_header.html',
+                        templateUrl: 'views/account/header.html',
                         controller: 'headerController'
                     },
                     'main': {
