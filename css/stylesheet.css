@@ -8018,11 +8018,479 @@ button.close {
 a:hover {
   text-decoration: none; }
 
+#backNav {
+  height: 120px;
+  width: auto;
+  font-size: 36px;
+  background-color: #14ab1b;
+  color: white;
+  cursor: pointer;
+  padding: 5px 30px;
+  position: fixed;
+  top: 30%; }
+  #backNav a, #backNav a:visited {
+    color: white; }
+
+#tooltip {
+  position: fixed;
+  bottom: 0px;
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 10px;
+  left: 1px;
+  right: 1px;
+  width: 50%;
+  font-size: 36px;
+  border: 3px solid black;
+  height: 300px;
+  background-color: #ddd;
+  font-weight: bold;
+  text-shadow: 0.5px 0.5px 0px black; }
+
+#tooltip-button {
+  position: fixed;
+  bottom: 30px;
+  margin: 15px;
+  padding: 20px;
+  height: 80px;
+  left: 15px;
+  font-size: 28px;
+  background-color: #2448bb;
+  color: white; }
+
+#charSelect {
+  width: 50%;
+  float: right;
+  top: 100px;
+  height: auto; }
+
+.char {
+  height: 60%;
+  width: 200px;
+  padding: 20px;
+  position: fixed;
+  right: 0;
+  bottom: 180px; }
+
+.char.char-char {
+  height: 60%;
+  width: 200px;
+  padding: 20px;
+  position: relative;
+  bottom: 0; }
+
+.charBox {
+  float: right;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  height: 200px;
+  width: 200px;
+  border: 2px solid black;
+  cursor: pointer; }
+  .charBox:hover {
+    background-color: #6688ff; }
+  .charBox > .char {
+    height: 80%; }
+
+.char-select {
+  height: 20%;
+  background-color: #cc5555;
+  color: white;
+  font-size: 22px; }
+  .char-select:hover {
+    background-color: #14ab1b;
+    color: white;
+    font-weight: bold; }
+
+.char-select__text {
+  text-align: center;
+  vertical-align: middle;
+  margin: auto; }
+
+#instruction {
+  margin-top: -80px;
+  margin-bottom: 40px;
+  color: orange;
+  font-size: 20px;
+  background-color: #AB6714;
+  color: white;
+  padding: 10px 30px; }
+
+.name__label {
+  font-size: 18px; }
+
+.name__input {
+  font-size: 18px;
+  padding: 3px;
+  height: 40px;
+  margin-bottom: 15px; }
+
+.type__label {
+  font-size: 18px; }
+
+.type__text {
+  font-size: 18px; }
+
+.back-char, .back-home {
+  height: 60px;
+  font-size: 28px;
+  background-color: #14ab1b;
+  color: white;
+  cursor: pointer;
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  width: 45%;
+  margin-left: 3.3333%; }
+  .back-char a, .back-char a:visited, .back-home a, .back-home a:visited {
+    color: white; }
+
+.back-home {
+  bottom: 0; }
+
+.back-char {
+  bottom: 0px;
+  margin-left: 51.66%; }
+
+.go-home {
+  bottom: 140px; }
+
+.stat-summary {
+  position: fixed;
+  top: 140px;
+  width: 30%;
+  right: 0px; }
+
+.subclass__btn, .go-edit {
+  color: white;
+  height: 60px;
+  padding: 15px;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-size: 18px;
+  text-align: center;
+  vertical-align: middle; }
+
+.subclass__btn {
+  background-color: #14ab67; }
+
+.go-edit {
+  margin-top: 50px;
+  background-color: #2448bb; }
+  .go-edit a {
+    color: white; }
+
+.name__label--javascript, .type__label--javascript {
+  display: inline-block;
+  font-family: Consolas,monaco,monospace;
+  color: #2448bb; }
+
+#type__text {
+  display: inline-block; }
+
+#instruction {
+  width: 60%; }
+
+#stat-edit, #move-edit {
+  width: 70%;
+  border: 2px solid #14ab67;
+  padding: 10px;
+  margin-bottom: 20px; }
+
+#edit-title {
+  font-size: 22px;
+  color: #14ab67;
+  font-weight: bold;
+  font-style: italic;
+  margin-bottom: 10px; }
+
+#main.edit-page {
+  margin-top: 100px; }
+
+.stat-edit__stat-types {
+  margin-bottom: 15px; }
+
+.stat-edit__stat-type {
+  color: #6714ab;
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 20px; }
+
+.stat-edit__stat-type--tip {
+  color: #AB1B14;
+  font-size: 16px; }
+
+.stat-edit__stat--javascript {
+  display: inline-block;
+  font-family: Consolas,monaco,monospace;
+  color: #2448bb; }
+
+.ng-invalid-max {
+  border: 2px solid #cc0000; }
+
+.move-edit__move {
+  display: inline-block;
+  width: 48%;
+  padding: 1%;
+  margin-right: 1%;
+  margin-bottom: 10px;
+  background-color: #a3a1dd;
+  color: white;
+  cursor: pointer; }
+  .move-edit__move:hover {
+    background-color: #312bb3; }
+  .move-edit__move .selectMove {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #0f7d14;
+    text-align: center;
+    clear: both; }
+  .move-edit__move.selected {
+    background-color: #312bb3; }
+
+.move-edit__move-stat {
+  float: right;
+  margin-left: 10px; }
+
+.move-edit__available__title {
+  font-size: 18px;
+  color: #6714ab;
+  margin-bottom: 10px; }
+
+.move-edit__move--default {
+  background-color: #2448bb;
+  color: white;
+  width: 45%;
+  padding: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 5%; }
+
+.default-move__text {
+  color: #2448bb; }
+
+.toggle-edit, .go-village {
+  width: 30%;
+  display: inline-block; }
+
+.toggle-edit__button, .btn-village {
+  height: 60px;
+  color: white;
+  font-size: 18px;
+  margin: 15px 0px;
+  padding: 15px; }
+
+.btn-village {
+  background-color: #77120e;
+  padding: 10px; }
+
+.toggle-edit__button {
+  background-color: #14ab67; }
+
+#everything {
+  height: 100%; }
+
+#main.main__village {
+  margin-top: 100px; }
+
+.stat-summary__stat {
+  margin-top: 20px; }
+
+.char-village {
+  height: 30%;
+  position: fixed;
+  right: 30%;
+  bottom: 80px; }
+
+.villageWorld {
+  color: #AB1B14;
+  font-size: 24px;
+  margin-bottom: 15px;
+  font-weight: bold; }
+
+#instruction.village {
+  margin-top: 20px;
+  width: 50%; }
+
+.villageAreas {
+  margin: 10px;
+  width: 70%; }
+
+.villageArea {
+  padding: 20px;
+  padding-top: 40px;
+  width: 120px;
+  height: 120px;
+  background-color: #d0eed1;
+  color: #1b14ab;
+  font-size: 18px;
+  float: left;
+  margin: 20px;
+  border-radius: 100% !important;
+  text-align: center;
+  cursor: pointer; }
+
+.enemies__header, .enemies__body {
+  clear: both;
+  font-size: 14px; }
+
+.enemies__header {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 18px; }
+
+.enemies__body {
+  width: 100%;
+  display: inline-block;
+  font-family: Consolas,monaco,monospace;
+  color: #2448bb; }
+
+.stat--javascript {
+  font-family: Consolas,monaco,monospace;
+  color: #2448bb; }
+
+#winConditionMet {
+  color: #14ab1b;
+  background-color: #b8e5d1;
+  height: 200px;
+  width: 50%;
+  font-size: 48px;
+  text-align: center;
+  padding: 22px;
+  position: fixed;
+  left: 50px;
+  bottom: 250px;
+  font-weight: bold;
+  cursor: pointer; }
+
+#surveyLink, #surveyLink__win {
+  color: #2448bb;
+  height: 50px;
+  font-size: 18px;
+  position: fixed;
+  left: 50px;
+  bottom: 60px;
+  font-weight: bold;
+  width: 40%; }
+
+#surveyLink__win {
+  bottom: 150px;
+  left: 5%;
+  font-size: 24px; }
+
+.char.char--battle, .enemy.enemy--battle {
+  margin: 20px;
+  height: 40%;
+  margin-top: 20%;
+  position: fixed;
+  top: 0;
+  width: 21%; }
+
+.enemy.enemy--battle {
+  right: 0;
+  width: 30%; }
+
+.char.char--battle {
+  left: 0; }
+
+.hit-text, .enemyHit-text {
+  position: fixed;
+  bottom: 400px;
+  left: 40%;
+  font-size: 18px;
+  color: #2448bb;
+  font-family: Consolas,monaco,monospace; }
+
+.enemyHit-text {
+  bottom: 340px; }
+
+#battleMoves {
+  position: fixed;
+  bottom: 120px;
+  width: 100%;
+  left: 0;
+  margin-left: 15%; }
+
+.battleMoves__ability {
+  display: inline-block;
+  height: 70px;
+  width: 20%;
+  margin-right: 5%;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  background-color: #14ab67;
+  cursor: pointer; }
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  width: 250px;
+  height: 20px; }
+
+.hp-bar__enemy {
+  position: fixed;
+  margin-top: -50px;
+  right: 150px; }
+
+.hp-bar__char {
+  position: fixed;
+  margin-top: -50px; }
+
+.hp-bar__enemy progress[value]::-webkit-progress-value {
+  background-color: #AB1B14;
+  border-radius: 2px;
+  background-size: 35px 20px, 100% 100%, 100% 100%; }
+
+.hp-bar__char progress[value]::-webkit-progress-value {
+  background-color: #14ab1b; }
+
+progress[value]::-webkit-progress-value::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  border-radius: 100%;
+  right: 7px;
+  top: 7px;
+  background-color: white; }
+
+progress[value]::-webkit-progress-bar {
+  background-color: #ccc; }
+
+.battle__outcome {
+  width: 40%;
+  left: 30%;
+  position: fixed;
+  bottom: 200px;
+  height: 100px;
+  padding: 6px;
+  background-color: orange;
+  font-size: 36px;
+  color: white;
+  text-align: center;
+  cursor: pointer; }
+
+.return-village {
+  font-size: 24px; }
+
 html * {
   border-radius: 0 !important;
   font-family: 'Slabo 27px', serif; }
 
+input, button {
+  outline: none; }
+
 #main {
+  margin-top: 180px; }
+
+#charPage {
   margin-top: 180px; }
 
 .block {
@@ -8043,35 +8511,51 @@ html * {
   border: 1px solid black;
   padding: 50px; }
 
+#footer {
+  position: fixed;
+  bottom: 0px;
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 10px;
+  left: 1px;
+  right: 1px;
+  width: 100%;
+  font-size: 36px;
+  border: 3px solid black;
+  height: 300px;
+  background-color: #ddd;
+  font-weight: bold;
+  text-shadow: 0.5px 0.5px 0px black; }
+
 #story {
-  height: 60px;
+  height: 100px;
   width: auto;
-  font-size: 24px;
+  font-size: 36px;
   background-color: #2448bb;
   color: white;
-  clear: both;
   cursor: pointer;
-  float: right;
-  margin-right: 40%;
-  margin-top: 20px;
-  padding: 5px 15px; }
+  padding: 15px 60px;
+  position: fixed;
+  bottom: 60px;
+  right: 30px; }
 
 #witch {
   height: 400px;
   width: 400px;
-  position: absolute;
-  right: 0;
-  top: 440px; }
+  right: 10%;
+  top: 20%;
+  position: fixed; }
 
 #chooseChar {
-  height: 60px;
+  height: 139px;
   width: auto;
-  font-size: 24px;
+  font-size: 36px;
   background-color: #14ab1b;
   color: white;
-  clear: both;
   cursor: pointer;
-  float: right;
-  margin-right: 40%;
-  margin-top: 20px;
-  padding: 5px 15px; }
+  padding: 5px 30px;
+  position: fixed;
+  top: 30%; }
+  #chooseChar a, #chooseChar a:visited {
+    color: white; }
