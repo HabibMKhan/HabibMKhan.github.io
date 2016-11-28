@@ -34,7 +34,11 @@
         <div class="stat-summary__type-value stat--javascript">>> {{selectedMove}}</div>
       </div>
     </div>
+  </div>
+  <div id="gameNav">
+    <button ui-sref="home" class="backNav btn">Home</button>
+    <button ui-sref="char" class="backNav btn">Char</button>
+    <button ng-click="setCharstats()" ui-sref="edit({chartype:chartype,subclass:subclass,name:charName})" ng-show="subclass !== 'defaultSubclass'" class="backNav btn">Edit</button>
   </div><a id="surveyLink" href="https://goo.gl/forms/8w7s73XuloytxelI3" target="_blank" ng-hide="winCondition">Survey after you're done playing :)<a id="surveyLink__win" href="https://goo.gl/forms/8w7s73XuloytxelI3" target="_blank" ng-show="winCondition">Congrats on winning! Fill this survey please :D</a>
-    <button class="back-char btn"> <a ui-sref="char">Back to Character selection</a></button>
-    <button style="margin-top:150px;" class="back-home btn"> <a ui-sref="home">Back home</a></button><img ng-src="{{imgUrl}}" class="char char-village"/></a>
+    <div id="gameReset" ng-show="winCondition" ng-click="resetGame()" ui-sref="home">Play again!</div></a>
 </div>

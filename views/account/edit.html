@@ -1,5 +1,6 @@
 
-<div id="main" ng-controller="editController" class="edit-page">
+<div id="main" ng-controller="editController" class="editPage">
+  <div id="instruction" ng-show="(showTips) &amp;&amp; (toggle==='Edit Moves')" class="editPage editStats">Enter stats (0-99) based on<span class="red"> MAXSTAT </span><span>(currently {{maxstat}}) and Strength / Speed</span></div>
   <div id="edit-title">{{editTitle}}</div>
   <div id="stat-edit" ng-show="toggle==='Edit Moves'">
     <div class="stat-edit__stat-types">
@@ -69,7 +70,11 @@
     <div class="stat-summary__type-value stat--javascript">>> {{accuracy}}</div>
     <div class="stat-summary__type-label">Abilities:</div>
     <div ng-repeat="move in charMoves" class="stat-summary__type-value stat--javascript">>> {{move.name}}</div>
-    <button ui-sref="char" class="back-char btn"> <a ui-sref="char">Back to Character selection</a></button>
-    <button style="margin-top:150px;" ui-sref="home" class="back-home btn"> <a ui-sref="home">Back home</a></button><img ng-src="{{imgUrl}}" class="char"/>
+    <div id="gameNav">
+      <button ui-sref="home" class="backNav btn">Home</button>
+      <button ui-sref="char" class="backNav btn">Char</button>
+      <button ui-sref="stats" class="backNav btn">Stats</button>
+      <button ng-show="editCompleted" ng-click="setStats()" ui-sref="village" class="backNav main">Go protect the village!</button>
+    </div>
   </div>
 </div>

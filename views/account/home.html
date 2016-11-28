@@ -1,6 +1,11 @@
 
-<div id="main" ng-controller="homeController">
+<div id="main" ng-controller="homeController"><img id="villageImg" src="../../img/environments/village.svg"/>
   <div id="footer">{{ nextNarrative }}</div>
-  <button id="story" ng-click="storyClick()" class="btn">{{nextText}}</button><img id="witch" src="../../img/characters/angel_normal.svg"/>
-  <button id="chooseChar" ng-if="chooseChar" ui-sref="char" class="btn"> <a ui-sref="char">Choose a character!</a></button>
+  <button id="story" ng-if="nextText !== 'Back to beginning'" ng-click="storyClick()" class="btn">{{nextText}}</button><img id="witch" src="../../img/characters/angel_normal.svg"/>
+  <button id="chooseChar" ng-if="chooseChar" ui-sref="char" class="btn">Choose a character!</button>
+  <div ng-show="showTips" ng-if="!chooseChar" class="tipForUser right">{{tipForUser}}</div>
+  <div ng-show="showTips" ng-if="chooseChar" class="tipForUser left">{{tipForUser}}</div>
+  <div id="gameNav">
+    <button ng-click="toggleShowTips()" class="showTips">{{showTipsText}}</button>
+  </div>
 </div>

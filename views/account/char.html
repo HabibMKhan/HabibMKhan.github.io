@@ -1,6 +1,6 @@
 
 <div id="main" ng-controller="charController">
-  <div id="instruction">{{ instruction }}</div>
+  <div id="instruction" ng-show="showTips">Click on the <span class="red">RED </span><span class="reg-text">box to select the character you want.</span></div>
   <div id="tooltip" ng-show="showNarrative">{{ nextNarrative }}</div>
   <button id="tooltip-button" ng-click="pickRandom()" ui-sref="stats" ng-show="showNarrative">Pick randomly for me!</button>
   <div id="charSelect">
@@ -10,5 +10,8 @@
       </div>
     </div>
   </div>
-  <button id="backNav" ui-sref="home" class="btn"> <a ui-sref="home">Back home</a></button>
+  <div id="gameNav">
+    <button id="backNav" ui-sref="home" class="btn"> <a ui-sref="home">Home</a></button>
+    <button ng-click="toggleShowTips()" class="showTips">{{showTipsText}}</button>
+  </div>
 </div>
