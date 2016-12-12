@@ -9,11 +9,11 @@
       <div class="comment--javascript villPage">// Declare an array using []</div>
       <div class="stat--javascript">>> let <span class="stat--javascript green push1">enemiesDefeated</span><span class="stat--javascript red">= []</span><span class="stat--javascript">;</span></div>
       <div class="comment--javascript villPage">// Loop through enemies to see which were defeated</div>
-      <div class="init-charobject stat--javascript">>> for (var i=0; i < enemies.length; i++)</div>
-      <div class="stat--javascript tab1">>> if (enemies[i].defeated) {<span class="stat--javascript tab2 green"> enemiesDefeated</span><span class="stat--javascript red">.push</span><span class="stat--javascript">(enemies[i].name);</span>
-        <div class="comment--javascript tab1 villPage">// Example array might be >> ["orc", "spaceArmor"]</div>
-      </div>
+      <div class="init-charobject stat--javascript">>> for (var i=0; i < enemies.length; i++) {</div>
+      <div class="stat--javascript tab1">>> if (enemies[i].defeated) {</div>
+      <div class="stat--javascript inline-block tab2 green"> enemiesDefeated</div><span class="stat--javascript red">.push</span><span class="stat--javascript">(enemies[i].name);</span>
       <div class="stat--javascript tab1">}</div>
+      <div class="comment--javascript tab1 villPage">// Example array might be >> ["orc", "spaceArmor"]</div>
       <div class="stat--javascript">}</div>
       <div class="comment--javascript villPage">// Function for calculateDamage()</div>
       <div class="stat--javascript push1">>> let <span class="stat--javascript green">calculateDamage </span><span class="stat--javascript push1">= (charPower, enemyToughness) => {</span></div>

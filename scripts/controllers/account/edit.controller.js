@@ -221,12 +221,16 @@
             console.log('charMoves[2]', $scope.charMoves[2]);
           };
           $scope.movePrecheck();
-          if (($scope.power + $scope.toughness) < $scope.maxPoints) {
+          if (($scope.power + $scope.toughness) === $scope.maxPoints) {
+            console.log('$scope.maxPoints, $scope.power, $scope.toughness in s');
+            console.log($scope.maxPoints, $scope.power, $scope.toughness);
             $scope.strength = 0;
           }
-          if (($scope.evasion + $scope.accuracy) < $scope.maxPoints) {
+          if (($scope.evasion + $scope.accuracy) === $scope.maxPoints) {
             $scope.speed = 0;
           }
+          console.log('$scope.maxPoints, $scope.power, $scope.toughness');
+          console.log($scope.maxPoints, $scope.power, $scope.toughness);
           console.log('$scope.power after prechecks', $scope.power);
           console.log('$scope.toughness after prechecks', $scope.toughness);
 

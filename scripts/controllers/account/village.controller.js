@@ -302,6 +302,8 @@
           };
           $scope.movePrecheck();
           if (($scope.power + $scope.toughness) === $scope.maxPoints) {
+            console.log('$scope.maxPoints, $scope.power, $scope.toughness');
+            console.log($scope.maxPoints, $scope.power, $scope.toughness);
             $scope.strength = 0;
           }
           if (($scope.evasion + $scope.accuracy) === $scope.maxPoints) {
