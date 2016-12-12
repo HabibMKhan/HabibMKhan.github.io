@@ -23,14 +23,17 @@
 <script src="scripts/routes/account.route.js"></script>
   <body ng-app="myApp">
     <div class="page-container">
-      <div ui-view="header"></div>
+      <audio id="cr-audio" src="../../img/music/oveheavensings.mp3" autoplay="autoplay" loop="loop" ng-if="headline !== '[CR] BATTLE at JS-Land!'"></audio>
+      <div ui-view="header" ng-click="(document.getElementById('cr-audio').pause)"></div>
       <div class="container has-top-fixed-bar">
         <div class="row row-offcanvas row-offcanvas-left">
           <div ui-view="main" class="col-xs-12 col-sm-12"></div>
           <div ui-view="menu"></div>
           <div ui-view="content" class="col-xs-12 col-sm-9"></div>
         </div>
-      </div>
+      </div><a id="conceptsCovered" href="../../img/docs/ConceptsCoveredinCodeRuckus.pdf" target="_blank">Concepts Covered</a>
+      <div id="cr-pause" onclick="document.getElementById('cr-audio').pause(); let e = document.getElementById('cr-pause').classList.add('selected'); document.getElementById('cr-play').classList.remove('selected');" class="music-ctrl toggleable">Music Off</div>
+      <div id="cr-play" onclick="document.getElementById('cr-audio').play(); document.getElementById('cr-play').classList.add('selected'); document.getElementById('cr-pause').classList.remove('selected');" class="music-ctrl selected toggleable">Music On</div>
     </div>
   </body>
 </html>

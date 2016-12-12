@@ -1,28 +1,37 @@
 
 <div id="main" ng-controller="statsController" class="statsPage">
-  <div id="instruction" ng-show="showTips" class="statsPage">Sections of this game may have JavaScript (JS) to show configurability! Hope you can learn some JS :)</div>
+  <div id="instruction" ng-show="showTips" class="statsPage">Choose a <span class="blue">subclass </span><span>to proceed. And a </span><span class="blue">name </span><span>if you want.</span></div>
+  <div class="title--javascript">Select a subclass <span class="title--javascript fontsize-medium">(the type of </span><span class="title--javascript fontsize-medium dark-red">{{chartype}} </span><span class="title--javascript fontsize-medium">you want to be):</span></div>
   <div class="name__label">Enter your character's name:</div>
-  <div class="name__label--javascript">let name = </div>
-  <input type="text" ng-model="charName" placeholder="Character Name" maxlength="20" class="name__input"/>
+  <div class="name__label--javascript stat--javascript push1">let name = </div>
+  <input type="text" ng-model="charName" placeholder="Character Name" maxlength="20" class="name__input stat--javascript space1"/>
   <div class="type__label">Your character's type (chosen in Character Select):</div>
-  <div class="type__label--javascript">let type = </div>
-  <div id="type__text">{{ chartype }}</div>
+  <div class="type__label--javascript stat--javascript">let type = </div>
+  <div id="type__text" class="stat--javascript red space1">{{ chartype }}</div>
   <div id="subclass-selection">
-    <button ng-repeat="class in classes" ng-click="setSubclass($index)" class="subclass__btn">{{class}}</button>
+    <div class="type__label--javascript stat--javascript push1">let subclass = </div>
+    <button ng-repeat="class in classes" ng-click="setSubclass($index)" ng-class="(subclass === class) ? 'selected' : 'unselected'" class="subclass__btn unselected toggleable--medium">{{class}}</button>
   </div>
   <div id="stat-summary" class="stat-summary">
-    <div class="stat-summary__name-label">Name:</div>
-    <div class="stat-summary__name-value stat--javascript">>> {{charName}}</div>
-    <div class="stat-summary__type-label">Class:</div>
-    <div class="stat-summary__type-value stat--javascript">>> {{chartype}}</div>
-    <div class="stat-summary__type-label">Subclass:</div>
-    <div class="stat-summary__type-value stat--javascript">>> {{subclass}}</div><img ng-src="{{imgUrl}}" class="char"/>
+    <div class="title--javascript purple">Character Summary<span class="title--javascript fontsize-medium blue marginL1">(logged to screen):</span></div>
+    <div class="stat-summary__name-label stat--javascript">>> console.log(&quotChar Name: &quot, name);</div>
+    <div class="stat-summary__name-value stat--javascript">>> Char Name: <span class="stat--javascript green">{{charName}}</span></div>
+    <div class="stat-summary__type-label stat--javascript">>> console.log(&quotChar Class: &quot, type);</div>
+    <div class="stat-summary__type-value stat--javascript inline">>> Char Class: </div>
+    <div class="stat-summary__type-value stat--javascript inline green">{{chartype}}</div>
+    <div class="stat-summary__type-label stat--javascript">>> console.log(&quotChar Subclass: &quot, subclass);</div>
+    <div class="stat-summary__type-value stat--javascript inline">>> Char Subclass:</div>
+    <div class="stat-summary__type-value stat--javascript inline green">{{subclass}}</div>
+    <div class="stat-summary__type-label stat--javascript">>> console.log(name + ',', 'the', subclass, type);</div>
+    <div class="stat-summary__type-value stat--javascript inline push1">>> </div>
+    <div class="stat-summary__type-value stat--javascript inline green">{{charName}}, the {{subclass}} {{chartype}}</div><img ng-src="{{imgUrl}}" class="char statsPage"/>
   </div>
+  <div id="gameNavTip" ng-show="showTips">Nav Menu</div>
   <div id="gameNav">
     <button ui-sref="home" class="backNav btn">Home</button>
-    <button ui-sref="char" class="backNav btn">Char</button>
+    <button ui-sref="char" class="backNav btn">Character Select</button>
     <button ng-click="toggleShowTips()" class="showTips">{{showTipsText}}</button>
-    <button ng-click="setCharstats()" ui-sref="edit({chartype:chartype,subclass:subclass,name:charName})" ng-show="subclass !== 'defaultSubclass'" class="backNav main btn">Edit</button>
+    <button ng-click="setCharstats()" ui-sref="edit({chartype:chartype,subclass:subclass,name:charName})" ng-show="subclass !== 'defaultSubclass'" class="menuItem blue-bg btn">Edit</button>
   </div>
-  <button ng-click="setCharstats()" ui-sref="edit({chartype:chartype,subclass:subclass,name:charName})" ng-show="subclass !== 'defaultSubclass'" class="go-edit btn"> <a ng-click="setCharstats()" ui-sref="edit({chartype:chartype,subclass:subclass,name:charName})">Go Edit</a></button>
+  <button ng-click="setCharstats()" ui-sref="edit({chartype:chartype,subclass:subclass,name:charName})" ng-show="subclass !== 'defaultSubclass'" class="go-edit green-bg toggleable--medium btn"> <a ng-click="setCharstats()" ui-sref="edit({chartype:chartype,subclass:subclass,name:charName})">Set stats and abilities</a></button>
 </div>

@@ -4,6 +4,7 @@
 
     function charController($scope, $stateParams) {
         $scope.start = function () {
+            $scope.conceptCount = 3;
             $scope.showNarrative = true;
             $scope.characters = [
               {type: "centaur", url: "../../img/characters/centaur.svg"},
@@ -30,12 +31,52 @@
               wizard: "Sage. We don't know anything about him or her."
             };
             $scope.instruction = 'Click on the RED box to Select the character you want.';
+            $scope.attributes = {
+              'power': {
+                'centaur': 2,
+                'elvenArcher': 2,
+                'dwarfWarrior': 1,
+                'blackMage': 3,
+                'viking': 1,
+                'wizard': 1,
+                'type': 'power'
+              },
+              'toughness': {
+                'centaur': 2,
+                'elvenArcher': 1,
+                'dwarfWarrior': 3,
+                'blackMage': 1,
+                'viking': 2,
+                'wizard': 1,
+                'type': 'toughness'
+              },
+              'accuracy': {
+                'centaur': 1,
+                'elvenArcher': 3,
+                'dwarfWarrior': 1,
+                'blackMage': 1,
+                'viking': 2,
+                'wizard': 2,
+                'type': 'accuracy'
+              },
+              'evasion': {
+                'centaur': 1,
+                'elvenArcher': 1,
+                'dwarfWarrior': 1,
+                'blackMage': 1,
+                'viking': 2,
+                'wizard': 3,
+                'type': 'evasion'
+              }
+            }
         };
 
         $scope.charClick = (charName) => {
           console.log('charName ' + charName);
           $scope.nextNarrative = $scope.charDescriptions[charName];
           $scope.selectedChar = charName;
+          $scope.chartype = charName;
+          console.log('$scope.chartype', $scope.chartype);
           sessionStorage.chartype = charName;
           sessionStorage.subclass = 'defaultSubclass';
         };
@@ -100,6 +141,23 @@
         }
 
         $scope.tipForUser = "<-- Click red box to select";
+
+        $scope.help = false; // BOOLEAN: Am I getting helped right now?
+        $scope.toggleHelpText = "Explain this JS code";
+        $scope.toggleHelp = () => {
+          if (!$scope.help) {
+            console.log("$scope.help", $scope.help);
+              $scope.help = true;
+              $scope.toggleHelpText = "Okay, I get it";
+          } else {
+            console.log("$scope.help", $scope.help);
+            $scope.help = false;
+            $scope.toggleHelpText = "Explain this JS code";
+          }
+        }
+        $scope.toggleHelpFalse = "Explain this JS code"
+        $scope.toggleHelpTrue = "Okay, I get it"
+
         $scope.start();
 
     }

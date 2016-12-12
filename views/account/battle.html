@@ -1,11 +1,12 @@
 
-<div id="main" ng-controller="charController">
-  <div class="enemy--name">{{enemyName}}</div><img ng-src="{{eImgUrl}}" class="char enemy enemy--battle"/><img ng-src="{{imgUrl}}" class="char char--battle"/>
+<div id="main" ng-controller="charController" class="battlePage"><img id="battleBackground" src="../../img/environments/norway.jpg"/><img id="powAnimation" ng-src="{{powAnimationImage}}" ng-show="actualHitAnimation" ng-class="(actualHitAnimation) ? 'appear' : ''"/><img id="enemyPowAnimation" ng-src="{{enemyPowAnimationImage}}" ng-show="actualEnemyHitAnimation" ng-class="(actualEnemyHitAnimation) ? 'enemyAppear' : ''"/><img ng-src="{{eImgUrl}}" class="char enemy enemy--battle"/><img ng-src="{{imgUrl}}" class="char char--battle"/>
   <div class="hp-bar__char">
     <progress value="{{charHp}}" max="{{charMax}}" class="hp-bar hp-bar__char"></progress><span class="hp-description">Character HP: {{charHp}} Character MAX: {{charMax}}</span>
+    <div class="user--name">{{userName}}</div>
   </div>
   <div class="hp-bar__enemy">
     <progress value="{{enemyHp}}" max="{{enemyMax}}" class="hp-bar hp-bar__enemy"></progress><span class="hp-description">Character HP: {{enemyHp}} Character MAX: {{enemyMax}}</span>
+    <div class="enemy--name">{{enemyName}}</div>
   </div>
   <div ng-show="hit &amp;&amp; !battleStart" class="hit-text">Your attack landed! {{damageDealt}} damage dealt!</div>
   <div ng-show="!hit &amp;&amp; !battleStart" class="hit-text">Your attack missed!</div>
@@ -15,10 +16,11 @@
     <div class="return-village">Click to return to village!</div>
   </div><a id="surveyLink" href="https://goo.gl/forms/8w7s73XuloytxelI3" target="_blank">Survey after you're done playing :)</a>
   <div id="battleMoves" ng-hide="((battleOutcome === 'Win') || (battleOutcome === 'Lose'))">
-    <div ng-click="abilityUsed($index)" ng-repeat="move in charAbilities" class="battleMoves__ability">{{move.name}}</div>
+    <div ng-click="abilityUsed($index)" ng-repeat="move in charAbilities" class="battleMoves__ability toggleable--light">{{move.name}}: {{move.customName}}</div>
   </div>
+  <div id="gameNavTip" ng-show="showTips">Nav Menu</div>
   <div id="gameNav">
     <button ui-sref="home" class="backNav btn">Home</button>
-    <button ui-sref="char" class="backNav btn">Char</button>
+    <button ui-sref="char" class="backNav btn">Character Select</button>
   </div>
 </div>

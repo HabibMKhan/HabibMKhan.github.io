@@ -3,8 +3,9 @@
   <div id="footer">{{ nextNarrative }}</div>
   <button id="story" ng-if="nextText !== 'Back to beginning'" ng-click="storyClick()" class="btn">{{nextText}}</button><img id="witch" src="../../img/characters/angel_normal.svg"/>
   <button id="chooseChar" ng-if="chooseChar" ui-sref="char" class="btn">Choose a character!</button>
-  <div ng-show="showTips" ng-if="!chooseChar" class="tipForUser right">{{tipForUser}}</div>
-  <div ng-show="showTips" ng-if="chooseChar" class="tipForUser left">{{tipForUser}}</div>
+  <div ng-show="showTips" ng-if="!chooseChar" class="tipForUser home right">{{tipForUser}}</div>
+  <div ng-show="showTips" ng-if="chooseChar" class="tipForUser home left">{{tipForUser}}</div>
+  <div id="gameNavTip" ng-show="showTips">Menu</div>
   <div id="gameNav">
     <button ng-click="toggleShowTips()" class="showTips">{{showTipsText}}</button>
   </div>

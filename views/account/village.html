@@ -1,44 +1,65 @@
 
-<div id="main" ng-controller="villageController" class="main__village">
+<div id="main" ng-controller="villageController" class="main__village"><img id="villageBackground" src="../../img/environments/agriculture.png" ng-hide="help"/>
   <div id="everything">
-    <div class="villageWorld">Village World</div>
-    <div id="instruction" class="village">You have {{enemies.length - enemiesDefeated.length}} enemies left to defeat!</div>
-    <div class="villageAreas">
-      <div ng-hide="enemyHide[$index]" ng-click="enemySet(e)" ng-repeat="e in enemies" ui-sref="battle" class="villageArea">{{e.name}}</div>
+    <div id="villCode" ng-show="(toggleHelpText!=='Okay, I get it')" ng-click="toggleHelp()" class="help-code villagePage">{{toggleHelpText}} - ({{conceptCount}}) concepts to review</div>
+    <div id="villCode" ng-show="(toggleHelpText==='Okay, I get it')" ng-click="toggleHelp()" class="help-code villagePage darker-red-bg">Okay I understand all ({{conceptCount}}) concepts</div>
+    <div id="villageCode" ng-show="help" class="title--javascript">
+      <div class="title--javascript">JS Lesson 4: Pushing to an array and calculating damage</div>
+      <div class="description--javascript"> <span class="push1">In this lesson we will push to the</span><span class="push1 green">enemiesDefeated</span><span class="push1">list using </span><span class="push1 red">array.push()</span><span class="push1">We will also look into calculating damage using</span><span class="push1 red">Math.random()</span><span class="push1">and</span><span class="push1 red">Math.ceil().</span></div>
+      <div class="comment--javascript villPage">// Declare an array using []</div>
+      <div class="stat--javascript">>> let <span class="stat--javascript green push1">enemiesDefeated</span><span class="stat--javascript red">= []</span><span class="stat--javascript">;</span></div>
+      <div class="comment--javascript villPage">// Loop through enemies to see which were defeated</div>
+      <div class="init-charobject stat--javascript">>> for (var i=0; i < enemies.length; i++)</div>
+      <div class="stat--javascript tab1">>> if (enemies[i].defeated) {<span class="stat--javascript tab2 green"> enemiesDefeated</span><span class="stat--javascript red">.push</span><span class="stat--javascript">(enemies[i].name);</span>
+        <div class="comment--javascript tab1 villPage">// Example array might be >> ["orc", "spaceArmor"]</div>
+      </div>
+      <div class="stat--javascript tab1">}</div>
+      <div class="stat--javascript">}</div>
+      <div class="comment--javascript villPage">// Function for calculateDamage()</div>
+      <div class="stat--javascript push1">>> let <span class="stat--javascript green">calculateDamage </span><span class="stat--javascript push1">= (charPower, enemyToughness) => {</span></div>
+      <div class="stat--javascript tab1">return <span class="stat--javascript red">Math.ceil</span><span class="stat--javascript">((charPower-enemyToughness)*</span><span class="stat--javascript red">Math.random()</span><span class="stat--javascript">);</span></div>
+      <div class="stat--javascript last">}</div>
+      <div class="references">
+        <div class="references__title">References on ({{conceptCount}}) Concepts:</div><a target="_blank" href="http://www.w3schools.com/jsref/jsref_push.asp" title="http://www.w3schools.com/jsref/jsref_push.asp" class="link--javascript villPage">array.push()</a><a target="_blank" href="http://www.w3schools.com/jsref/jsref_ceil.asp" title="http://www.w3schools.com/jsref/jsref_ceil.asp" class="link--javascript villPage">Math.ceil()</a><a target="_blank" href="http://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range" title="http://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range" class="link--javascript villPage">Math.random()</a><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" class="link--javascript villPage">Functions in ES6</a>
+      </div>
     </div>
-    <div class="enemies__header enemiesDefeated__header">Enemies Defeated:</div>
-    <div ng-repeat="enemy in enemiesDefeated" class="enemies__body enemiesDefeated__body">enemiesDefeated.push(&quot{{enemy}}&quot);</div>
-    <div class="enemies__body enemiesDefeated__body">>> {{enemiesDefeated}}</div>
-    <div class="enemies__header enemiesLostTo__header">Enemies Lost To:</div>
-    <div ng-repeat="enemy in enemiesLostTo" class="enemies__body enemiesLostTo__body">enemiesDefeated.push(&quot{{enemy}}&quot);</div>
-    <div class="enemies__body enemiesDefeated__body">>> {{enemiesLostTo}}</div>
-    <div id="winConditionMet" ng-click="hideWin=true" ng-hide="hideWin" ng-if="winCondition">YOU WIN!!! You saved the village!</div>
-    <div id="stat-summary" class="stat-summary">
-      <div class="stat-summary__name-label">Name:</div>
-      <div class="stat-summary__name-value stat--javascript">>> {{userName}}</div>
-      <div class="stat-summary__type-label">Class:</div>
-      <div class="stat-summary__type-value stat--javascript">>> {{chartype}}</div>
-      <div class="stat-summary__type-label">Subclass:</div>
-      <div class="stat-summary__type-value stat--javascript">>> {{subtype}}</div>
-      <div class="stat-summary__stat">
-        <div class="stat-summary__stat__heading">Stats</div>
-        <div class="stat-summary__name-label">Toughness:</div>
-        <div class="stat-summary__name-value stat--javascript">>> {{toughness}}</div>
-        <div class="stat-summary__type-label">Power:</div>
-        <div class="stat-summary__type-value stat--javascript">>> {{power}}</div>
-        <div class="stat-summary__type-label">Evasion:</div>
-        <div class="stat-summary__type-value stat--javascript">>> {{evasion}}</div>
-        <div class="stat-summary__type-label">Accuracy:</div>
-        <div class="stat-summary__type-value stat--javascript">>> {{accuracy}}</div>
-        <div class="stat-summary__type-label">Selected Move:</div>
-        <div class="stat-summary__type-value stat--javascript">>> {{selectedMove}}</div>
+    <div id="villageWorldSection" ng-show="!help">
+      <div class="title--javascript">Village World</div>
+      <div id="instruction" class="village">You have {{enemies.length - enemiesDefeated.length}} enemies left to defeat!
+        <div id="consideration" ng-show="(enemiesLostTo.length &gt; 0) &amp;&amp; (enemiesDefeated.length &lt; 3)" class="red">Consider revising your moves to utilize powerUps! It's easier to defeat enemies that way.</div>
+        <div ng-show="(enemiesLostTo.length === 0) &amp;&amp; (enemiesDefeated.length === 4)" class="green">Almost there...</div>
+        <div ng-show="(enemiesLostTo.length === 0) &amp;&amp; (enemiesDefeated.length === 3)" class="green">The villagers call you a hero!</div>
+        <div ng-show="(enemiesLostTo.length === 0) &amp;&amp; (enemiesDefeated.length === 2)" class="green">{{userName}}, the {{subtype}} {{chartype}} is getting the hang of it...</div>
+        <div ng-show="(enemiesLostTo.length === 0) &amp;&amp; (enemiesDefeated.length === 1)" class="green">Nice, you got one!</div>
+      </div>
+      <div class="villageAreas">
+        <div ng-show="(enemies.length - enemiesDefeated.length) &gt; 0" class="enemies__warning fontsize-medium red">These {{enemies.length - enemiesDefeated.length}} enemies are attacking JS-Land:</div>
+        <div ng-hide="enemyHide[$index]" ng-click="enemySet(e)" ng-repeat="e in enemies" ui-sref="battle" class="villageArea">{{e.name}}</div>
+      </div>
+      <div class="enemies__header enemiesDefeated__header">Enemies Defeated:</div>
+      <div ng-repeat="enemy in enemiesDefeated" class="enemies__body enemiesDefeated__body">enemiesDefeated.push(&quot{{enemy}}&quot);</div>
+      <div class="enemies__body enemiesDefeated__body">>> {{enemiesDefeated}}</div>
+      <div class="enemies__header enemiesLostTo__header">Enemies Lost To:</div>
+      <div ng-repeat="enemy in enemiesLostTo" class="enemies__body enemiesLostTo__body">enemiesDefeated.push(&quot{{enemy}}&quot);</div>
+      <div class="enemies__body enemiesDefeated__body">>> {{enemiesLostTo}}</div>
+      <div id="winConditionMet" ng-click="hideWin=true" ng-hide="hideWin" ng-if="winCondition">YOU WIN!!! You saved the village!</div>
+      <div id="stat-summary" class="stat-summary">
+        <div class="title--javascript purple">Character Summary<span class="title--javascript fontsize-medium blue marginL1">(logged to screen):</span></div>
+        <div class="stat-summary__name-label stat--javascript black">>> console.log(sessionStorage.name + ',', 'the', sessionStorage.subclass, sessionStorage.chartype);</div>
+        <div class="stat-summary__name-value stat--javascript">>> {{userName}}, the {{subtype}} {{chartype}}</div>
+        <div class="stat-summary__name-label stat--javascript black">>> console.log(sessionStorage.toughness, sessionStorage.power, sessionStorage.evasion, sessionStorage.accuracy);</div>
+        <div class="stat-summary__name-value stat--javascript blue">>> {{toughness}} {{power}} {{evasion}} {{accuracy}}</div>
+        <div class="stat-summary__name-label stat--javascript black">>> console.log(sessionStorage.moves);</div>
+        <div ng-repeat="move in charMoves track by $index" class="stat-summary__type-value stat--javascript blue">>> {{move.customName}} | +{{move.damageBoost}} damage, +{{move.hitChanceBoost}}% hit, +{{move.pointsForPowerUp}} {{move.typeForPowerUp}}</div>
       </div>
     </div>
   </div>
+  <div id="gameNavTip" ng-show="showTips">Nav Menu</div>
   <div id="gameNav">
     <button ui-sref="home" class="backNav btn">Home</button>
-    <button ui-sref="char" class="backNav btn">Char</button>
-    <button ng-click="setCharstats()" ui-sref="edit({chartype:chartype,subclass:subclass,name:charName})" ng-show="subclass !== 'defaultSubclass'" class="backNav btn">Edit</button>
+    <button ui-sref="char" class="backNav btn">Character Select</button>
+    <button ui-sref="edit" class="backNav btn">Stats and Moves</button>
+    <button ng-click="toggleShowTips()" class="showTips">{{showTipsText}}</button>
   </div><a id="surveyLink" href="https://goo.gl/forms/8w7s73XuloytxelI3" target="_blank" ng-hide="winCondition">Survey after you're done playing :)<a id="surveyLink__win" href="https://goo.gl/forms/8w7s73XuloytxelI3" target="_blank" ng-show="winCondition">Congrats on winning! Fill this survey please :D</a>
     <div id="gameReset" ng-show="winCondition" ng-click="resetGame()" ui-sref="home">Play again!</div></a>
 </div>

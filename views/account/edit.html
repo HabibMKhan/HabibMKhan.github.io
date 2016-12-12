@@ -1,80 +1,150 @@
 
 <div id="main" ng-controller="editController" class="editPage">
-  <div id="instruction" ng-show="(showTips) &amp;&amp; (toggle==='Edit Moves')" class="editPage editStats">Enter stats (0-99) based on<span class="red"> MAXSTAT </span><span>(currently {{maxstat}}) and Strength / Speed</span></div>
+  <div id="instruction" ng-show="(showTips) &amp;&amp; (toggle==='Edit Moves')" class="editPage editStats">Use points in<span class="purple space1">Strength & Speed</span><span class="space1">- These are distributed to </span><span class="purple">power/toughness </span><span class="space1">and </span><span class="purple">evasion/accuracy </span><span class="space1">respectively.</span></div>
+  <div id="instruction" ng-show="(showTips) &amp;&amp; (toggle==='Edit Stats')" class="editPage editStats">Set values for all 3 moves. <span class="red">Once all stats and moves are set, you can fight!</span></div>
+  <div id="charCode" ng-show="(toggleHelpText!=='Okay, I get it')" ng-click="toggleHelp()" class="help-code editPage">{{toggleHelpText}} - ({{conceptCount}}) concepts to review</div>
+  <div id="charCode" ng-show="(toggleHelpText==='Okay, I get it')" ng-click="toggleHelp()" class="help-code editPage darker-red-bg">Okay I understand all ({{conceptCount}}) concepts</div>
   <div id="edit-title">{{editTitle}}</div>
-  <div id="stat-edit" ng-show="toggle==='Edit Moves'">
+  <div id="stat-edit" ng-show="(toggle==='Edit Moves') &amp;&amp; !help">
     <div class="stat-edit__stat-types">
-      <div class="stat-edit__stat-type">STRENGTH: {{strength}}</div>
-      <div class="stat-edit__stat-type">SPEED: {{speed}}</div>
-      <div class="stat-edit__stat-type">MAXSTAT {{maxstat}}</div>
-      <div class="stat-edit__stat-type--tip">Spend STRENGTH and SPEED points, but don't exceed MAXSTAT.</div>
+      <div ng-class="(strength &lt; 0) ? 'red' : ''" class="stat-edit__stat-type">STRENGTH: <span ng-class="(strength &lt; 0) ? 'red' : ''" class="stat--borderbox">{{strength}}</span></div>
+      <div ng-class="(speed &lt; 0) ? 'red' : ''" class="stat-edit__stat-type">SPEED: <span ng-class="(speed &lt; 0) ? 'red' : ''" class="stat--borderbox">{{speed}}</span></div>
     </div>
-    <div class="stat-edit__stat-label">Toughness:</div>
-    <div class="stat-edit__stat--javascript">let sessionStorage.toughness = </div>
-    <input ng-change="toughnessAdjust()" min="0" ng-max="maxstat" type="number" ng-model="toughness" placeholder="e.g., 1, 2, 3" class="stat-edit__stat-input"/>
-    <div ng-if="toughness === undefined" class="stat-edit__move-invalid">Error: Toughness greater than max.</div>
-    <div class="stat-edit__stat-label">Power:</div>
-    <div class="stat-edit__stat--javascript">let sessionStorage.power = </div>
-    <input ng-change="powerAdjust()" min="0" ng-max="maxstat" type="number" ng-model="power" placeholder="e.g., 1, 2, 3" class="stat-edit__stat-input"/>
-    <div ng-if="power === undefined" class="stat-edit__move-invalid">Error: Power greater than max.</div>
-    <div class="stat-edit__stat-label">Evasion:</div>
-    <div class="stat-edit__stat--javascript">let sessionStorage.evasion = </div>
-    <input ng-change="evasionAdjust()" min="0" ng-max="maxstat" type="number" ng-model="evasion" placeholder="e.g., 1, 2, 3" class="stat-edit__stat-input"/>
-    <div ng-if="evasion === undefined" class="stat-edit__move-invalid">Error: Evasion greater than max.</div>
-    <div class="stat-edit__stat-label">Accuracy:</div>
-    <div class="stat-edit__stat--javascript">let sessionStorage.accuracy = </div>
-    <input ng-change="accuracyAdjust()" min="0" ng-max="maxstat" type="number" ng-model="accuracy" placeholder="e.g., 1, 2, 3" class="stat-edit__stat-input"/>
-    <div ng-if="accuracy === undefined" class="stat-edit__move-invalid">Error: Accuracy greater than max.</div>
+    <div class="full-width">
+      <div class="stat-edit__stat--javascript stat--javascript">>> sessionStorage.toughness = </div>
+      <input ng-keypress="isNumeric(event)" ng-change="toughnessAdjust(toughness)" min="0" type="number" ng-model="toughness" placeholder="Enter 1-5" class="stat-edit__stat-input stat--javascript"/>
+    </div>
+    <div ng-if="toughness === undefined" class="stat-edit__move-invalid purple stat--javascript">Enter a <span class="stat-edit__move-invalid purple purple-shade stat--javascript">toughness </span><span class="stat-edit__move-invalid purple stat--javascript">value between 0 and {{maxstat}}</span></div>
+    <div class="full-width">
+      <div class="stat-edit__stat--javascript stat--javascript">>> sessionStorage.power = </div>
+      <input ng-keypress="isNumeric(event)" ng-change="powerAdjust()" min="0" type="number" ng-model="power" placeholder="Enter 1-5" class="stat-edit__stat-input stat--javascript"/>
+    </div>
+    <div ng-if="power === undefined" class="stat-edit__move-invalid purple stat--javascript">Enter a <span class="stat-edit__move-invalid purple purple-shade stat--javascript">power </span><span class="stat-edit__move-invalid purple stat--javascript">value between 0 and {{maxstat}}</span></div>
+    <div class="stat-edit__stat--javascript stat--javascript">>> if ((toughness + power) !== 5 )) {
+      <div class="stat-edit__stat--javascript stat--javascript">>> console.log('Hint: toughness + power should equal {{maxPoints}}')</div>
+      <div class="stat-edit__stat--javascript stat--javascript">>> }</div>
+    </div>
+    <div ng-show="(toughness + power !== maxPoints)" class="stat-edit__move-invalid stat--javascript dark-red">>> Hint: toughness + power should equal {{maxPoints}}   </div>
+    <div ng-show="(toughness + power &gt; maxPoints)" class="stat-edit__move-invalid red stat--javascript">Lower either toughness or power <span class="stat-edit__move-invalid red red-shade stat--javascript">by {{toughness + power - maxPoints}} points.</span></div>
+    <div class="full-width">
+      <div class="stat-edit__stat--javascript stat--javascript">>> sessionStorage.evasion = </div>
+      <input ng-keypress="isNumeric(event)" ng-change="evasionAdjust()" min="0" type="number" ng-model="evasion" placeholder="Enter 1-5" class="stat-edit__stat-input stat--javascript"/>
+    </div>
+    <div ng-if="evasion === undefined" class="stat-edit__move-invalid purple stat--javascript">Enter an <span class="stat-edit__move-invalid purple purple-shade stat--javascript">evasion </span><span class="stat-edit__move-invalid purple stat--javascript">value between 0 and {{maxstat}}</span></div>
+    <div class="full-width">
+      <div class="stat-edit__stat--javascript stat--javascript">>> sessionStorage.accuracy = </div>
+      <input ng-keypress="isNumeric(event)" ng-change="accuracyAdjust()" min="0" type="number" ng-model="accuracy" placeholder="Enter 1-5" class="stat-edit__stat-input stat--javascript"/>
+    </div>
+    <div ng-if="accuracy === undefined" class="stat-edit__move-invalid purple stat--javascript">Enter an <span class="stat-edit__move-invalid purple purple-shade stat--javascript">accuracy </span><span class="stat-edit__move-invalid purple stat--javascript">value between 0 and {{maxstat}}</span></div>
+    <div class="stat-edit__stat--javascript stat--javascript">>> if ((evasion + accuracy) !== maxPoints) {
+      <div class="stat-edit__stat--javascript stat--javascript">>> console.log('Hint: evasion + accuracy should equal 5')</div>
+      <div class="stat-edit__stat--javascript stat--javascript">>> }</div>
+    </div>
+    <div ng-show="(evasion + accuracy !== maxPoints)" class="stat-edit__move-invalid stat--javascript dark-red">>> Hint: evasion + accuracy should equal {{maxPoints}}   </div>
+    <div ng-show="(evasion + accuracy &gt; maxPoints)" class="stat-edit__move-invalid red stat--javascript">Lower either evasion or accuracy <span class="stat-edit__move-invalid red red-shade stat--javascript">by {{evasion + accuracy - maxPoints}} points.</span></div>
   </div>
-  <div id="move-edit" ng-show="toggle==='Edit Stats'">
-    <div class="move-edit__available__title"> <span ng-if="abilityCount &gt; 0">Choose {{abilityCount}} ability. </span><span>{{moveCount}} abilities currently selected. </span><span class="default-move__text">Default Fixed (2): (Throw Rock & Sand)</span></div>
-    <div class="move-edit__moves--available">
-      <div ng-class="(moves[chartype][$index].name === ability) ? 'selected' : 'unselected'" ng-click="selectMove($index)" ng-repeat="move in moves[chartype]" class="move-edit__move">{{move.name}}
-        <div class="move-edit__move-damage">DAMAGE: {{move.damage}}</div>
-        <div ng-show="move.toughness&gt;0" class="move-edit__move-stat">Toughness: +{{move.toughness}}</div>
-        <div ng-show="move.power&gt;0" class="move-edit__move-stat">Power: +{{move.power}}</div>
-        <div ng-show="move.evasion&gt;0" class="move-edit__move-stat">Evasion: +{{move.evasion}}</div>
-        <div ng-show="move.accuracy&gt;0" class="move-edit__move-stat">Accuracy: +{{move.accuracy}}</div>
-        <div ng-show="(moves[chartype][$index].name !== ability)" class="selectMove">Click to Select this Move</div>
+  <div id="stat-edit" ng-show="(toggle==='Edit Moves') &amp;&amp; help"> 
+    <div class="editStats__codeTips"> 
+      <div class="init-chartype comment--javascript editPage title">JS Lesson 2: Storing Power in Session Storage</div>
+      <div class="description--javascript"><span class="push1">To store stats such as </span><span class="push1 green">power</span><span class="push1">we use</span><span class="red">sessionStorage</span><span class="push1">. We use an</span><span class="push1 red">if block</span><span class="push1">to check against valid ranges.</span><span class="push1 red">undefined</span><span class="push1">may come up if the value is</span><span class="push1 red">===</span><span class="push1">to undefined (in the background, out of range values are considered undefined).</span></div>
+      <div class="stat-edit__stat--javascript push1 stat--javascript">>> sessionStorage.power = </div>
+      <input min="0" ng-max="maxstat" type="number" ng-model="helpPower" placeholder="e.g., 1, 2, 3" class="stat-edit__stat-input stat--javascript"/>
+      <div class="init-chartype comment--javascript editPage stat--javascript">// If it's not in the valid range, see an error</div>
+      <div class="stat-edit__stat--javascript push1 stat--javascript">>> if (sessionStorage.power === undefined) {</div>
+      <div class="stat-edit__stat--javascript push1 stat--javascript">>> console.log(&quotEnter a power value between 0 and {{maxstat}}&quot)}</div>
+      <div ng-if="helpPower === undefined" class="stat-edit__move-invalid purple stat--javascript">Enter a power value between 0 and {{maxstat}}<span class="init-chartype stat--javascript comment--javascript editPage space1">// power is undefined</span></div>
+      <div class="init-chartype comment--javascript stat--javascript editPage">// This works because if the power is not </div>
+      <div class="init-chartype comment--javascript stat--javascript editPage">// between 0 and 3, it's set to <span class="stat-edit__stat--javascript stat--javascript red">undefined</span></div>
+      <div class="references">
+        <div class="references__title">References on ({{conceptCount}}) Concepts:</div><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else" class="init-chartype link--javascript charPage">if/else</a><a target="_blank" href="http://www.w3schools.com/html/html5_webstorage.asp" title="http://www.w3schools.com/html/html5_webstorage.asp" class="init-chartype link--javascript charPage">sessionStorage</a><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Identity_strict_equality_()" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Identity_strict_equality_()" class="init-chartype link--javascript charPage">===</a><a target="_blank" href="http://www.w3schools.com/jsref/jsref_undefined.asp" title="http://www.w3schools.com/jsref/jsref_undefined.asp" class="init-chartype link--javascript charPage">undefined</a>
       </div>
-      <div ng-repeat="move in moves['allChars']" class="move-edit__move--default">{{move.name}}
-        <div class="move-edit__move-damage">DAMAGE: {{move.damage}}</div>
-        <div ng-show="move.toughness&gt;0" class="move-edit__move-stat">Toughness: +{{move.toughness}}</div>
-        <div ng-show="move.power&gt;0" class="move-edit__move-stat">Power: +{{move.power}}</div>
-        <div ng-show="move.evasion&gt;0" class="move-edit__move-stat">Evasion: +{{move.evasion}}</div>
-        <div ng-show="move.accuracy&gt;0" class="move-edit__move-stat">Accuracy: +{{move.accuracy}}</div>
+    </div>
+  </div>
+  <div id="move-edit" ng-show="(toggle==='Edit Stats') &amp;&amp; !help" class="moves">
+    <div class="moves__moveEdit">
+      <div class="moves__buttons">
+        <div ng-click="moveSelected($index, move.name)" ng-repeat="move in moves" ng-class="(move.name === selectedMove) ? 'selected' : 'unselected'" class="moves__moveEdit__move last toggleable">{{move.name}}</div>
       </div>
+      <div ng-model="moves[moveIndex]" ng-show="(selectedMove !== undefined) &amp;&amp; (moves[moveIndex].name === selectedMove)">
+        <div ng-class="(movePointsRem[moveIndex] &lt; 0) ? 'red' : ''" class="stat-edit__stat-type">Points Remaining: <span class="stat--borderbox">{{movePointsRem[moveIndex]}}</span></div>
+        <div class="stat--javascript">let <span class="stat--javascript red push1">{{moves[moveIndex].name}}</span><span class="stat--javascript">= {</span></div>
+        <div class="stat--javascript tab1">doDamage: function(power) {</div>
+        <div class="stat--javascript tab2 inline-block push1">return power + </div>
+        <input type="number" placeholder="5" ng-change="moveChange(moveIndex)" ng-model="moves[moveIndex].damageBoost" min="0" class="stat--javascript input--small"/>
+        <div class="stat--javascript tab1">},</div>
+        <div class="stat--javascript tab1">hitChance: function(accuracy) {</div>
+        <div class="stat--javascript tab2 inline-block push1">return accuracy + </div>
+        <input type="number" placeholder="5" ng-change="moveChange(moveIndex)" ng-model="moves[moveIndex].hitChanceBoost" min="0" class="stat--javascript input--small"/>
+        <div class="stat--javascript tab1">},</div>
+        <div class="stat--javascript tab1">powerUp: function() {</div>
+        <div class="stat--javascript tab2 inline-block push1">let </div>
+        <select ng-model="selectedType[moveIndex]" ng-options="x for x in statTypes" class="stat--javascript inline-block push1 input--medium"></select>
+        <div class="stat--javascript inline-block push1">= </div>
+        <input type="number" placeholder="5" ng-change="moveChange(moveIndex)" ng-model="moves[moveIndex].powerUpBoost" min="0" ng-show="selectedType[moveIndex]" class="stat--javascript input--small"/>
+        <div class="stat--javascript inline-block space1 comment--javascript">// x2 points used for powerUps</div>
+        <div class="stat--javascript tab1">},</div>
+        <div class="stat--javascript tab1 inline-block">customName: &quot</div>
+        <input ng-change="moveChange(moveIndex)" type="text" placeholder="e.g., 'Left-Hook', 'Fireball'" ng-model="moves[moveIndex].customName" ng-class="(moves[moveIndex].customName) ? 'required-ok' : 'required-notOk'" class="stat--javascript input--large inline-block"/>
+        <div class="stat--javascript inline-block">&quot</div>
+        <div class="stat--javascript">}</div>
+        <div ng-show="movePointsRem[moveIndex] &lt; 0" class="stat-edit__move-invalid red red-shade">Point Limit Exceeded! Lower the value of an input.</div>
+        <div ng-show="moveCompleted[moveIndex]" ng-click="saveMove(moveIndex)" class="moves__moveEdit__complete">Save</div>
+      </div>
+    </div>
+    <div ng-show="moveSelected === undefined">Move Selected is undefined. Choose a move.</div>
+  </div>
+  <div id="stat-edit" ng-show="(toggle==='Edit Stats') &amp;&amp; help"> 
+    <div class="init-chartype comment--javascript editPage title">JS Lesson 3: Creating new moves</div>
+    <div class="description--javascript"><span class="push1">To make a new move we're declaring functions</span><span class="push1 green">doDamage(), hitChance(), and powerUp()</span><span class="push1">by returning values based on distributed points. </span><span class="push1">We use </span><span class="push1 red">operators </span><span class="push1">to check against point usage. </span><span class="push1 red">NaN </span><span class="push1">comes up if a number is improperly set.</span></div>
+    <div class="init-chartype comment--javascript editPage">// Functions doDamage() & hitChance() (not shown here) are each called from the associated Move object.</div>
+    <div class="stat--javascript">let <span class="stat--javascript red push1">MockMoveObject</span><span class="stat--javascript">= {</span></div>
+    <div class="init-chartype comment--javascript editPage tab1">// powerUp() uses twice as many points.</div>
+    <div class="stat--javascript tab1">powerUp: function() {</div>
+    <div class="stat--javascript tab2 inline-block push1">let </div>
+    <select ng-model="selectedType[3]" ng-options="x for x in statTypes" class="stat--javascript inline-block push1 input--medium"></select>
+    <div class="stat--javascript inline-block push1">= </div>
+    <input type="number" placeholder="1" ng-model="moves[0].powerUpBoostHelp" min="0" ng-max="movePoints[moveIndex]" ng-show="selectedType[3]" class="stat--javascript input--small"/>
+    <div class="comment--javascript tab2">// * 2 = {{moves[0].powerUpBoostHelp * 2}} points used. </div>
+    <div class="comment--javascript tab2">Remember you only have 5 total points.</div>
+    <div class="stat--javascript tab1">},</div>
+    <div class="init-chartype comment--javascript editPage tab1">// Custom Name is required</div>
+    <div class="stat--javascript tab1 inline-block">customName: &quot</div>
+    <input type="text" placeholder="e.g., 'Left-Hook', 'Fireball'" ng-model="moves[moveIndex].customName" ng-class="(moves[moveIndex].customName) ? 'required-ok' : 'required-notOk'" class="stat--javascript input--large inline-block"/>
+    <div class="stat--javascript inline-block">&quot</div>
+    <div class="stat--javascript">}</div>
+    <div class="references">
+      <div class="references__title">References on ({{conceptCount}}) Concepts:</div><a target="_blank" href="http://www.w3schools.com/js/js_operators.asp" title="http://www.w3schools.com/js/js_operators.asp" class="init-chartype link--javascript charPage">operators</a><a target="_blank" href="http://www.w3schools.com/js/js_object_methods.asp" title="http://www.w3schools.com/js/js_object_methods.asp" class="init-chartype link--javascript charPage">object methods</a><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN#Confusing_special-case_behavior" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN#Confusing_special-case_behavior" class="init-chartype link--javascript charPage">NaN</a>
     </div>
   </div>
   <div class="toggle-edit">
-    <button ng-click="toggleEdit()" class="toggle-edit__button">{{toggle}}</button>
+    <button ng-click="toggleEdit()" class="toggle-edit__button toggleable--light">{{toggle}}</button>
   </div>
   <div ng-show="editCompleted" class="go-village">
-    <button ng-click="setStats()" ui-sref="village" class="btn-village">Go protect the village!</button>
+    <button ng-click="setStats()" ui-sref="village" class="btn-village toggleable--light">Go protect the village!</button>
   </div>
   <div id="stat-summary" class="stat-summary">
-    <div class="stat-summary__name-label">Name:</div>
-    <div class="stat-summary__name-value stat--javascript">>> {{userName}}</div>
-    <div class="stat-summary__type-label">Class:</div>
-    <div class="stat-summary__type-value stat--javascript">>> {{chartype}}</div>
-    <div class="stat-summary__type-label">Subclass:</div>
-    <div class="stat-summary__type-value stat--javascript">>> {{subtype}}</div>
-    <div class="stat-summary__stat__heading">Stats</div>
-    <div class="stat-summary__name-label">Toughness:</div>
-    <div class="stat-summary__name-value stat--javascript">>> {{toughness}}</div>
-    <div class="stat-summary__type-label">Power:</div>
-    <div class="stat-summary__type-value stat--javascript">>> {{power}}</div>
-    <div class="stat-summary__type-label">Evasion:</div>
-    <div class="stat-summary__type-value stat--javascript">>> {{evasion}}</div>
-    <div class="stat-summary__type-label">Accuracy:</div>
-    <div class="stat-summary__type-value stat--javascript">>> {{accuracy}}</div>
-    <div class="stat-summary__type-label">Abilities:</div>
-    <div ng-repeat="move in charMoves" class="stat-summary__type-value stat--javascript">>> {{move.name}}</div>
+    <div class="title--javascript purple">Character Summary <span class="title--javascript fontsize-large blue marginT1">(logged to screen):</span></div>
+    <div class="stat-summary__name-label stat--javascript black">>> console.log(sessionStorage.name + ',', 'the', sessionStorage.subclass, sessionStorage.chartype);</div>
+    <div class="stat-summary__name-value stat--javascript">>> {{userName}}, the {{subtype}} {{chartype}}</div>
+    <div class="stat-summary__stat__heading stat--javascript fontsize-large purple marginT2">Stats and Moves:</div>
+    <div class="stat-summary__name-label stat--javascript black">>> console.log(sessionStorage.toughness);</div>
+    <div class="stat-summary__name-value stat--javascript green">>> {{toughness}}</div>
+    <div class="stat-summary__name-label stat--javascript black">>> console.log(sessionStorage.power);</div>
+    <div class="stat-summary__type-value stat--javascript green">>> {{power}}</div>
+    <div class="stat-summary__name-label stat--javascript black">>> console.log(sessionStorage.evasion);</div>
+    <div class="stat-summary__type-value stat--javascript green">>> {{evasion}}</div>
+    <div class="stat-summary__name-label stat--javascript black">>> console.log(sessionStorage.accuracy);</div>
+    <div class="stat-summary__type-value stat--javascript green">>> {{accuracy}}</div>
+    <div class="stat-summary__name-label stat--javascript black">>> console.log(sessionStorage.moves);</div>
+    <div ng-repeat="move in charMoves track by $index" class="stat-summary__type-value stat--javascript green">>> {{move.customName}} | +{{move.damageBoost}} damage, +{{move.hitChanceBoost}}% hit, +{{move.pointsForPowerUp}} {{move.typeForPowerUp}}</div>
+    <div ng-show="charMoves.length &lt; 3" class="stat-summary__name-label stat--javascript red">Name and save all 3 moves before you fight!</div>
+    <div ng-show="charMoves.length &lt; 3" class="stat-summary__name-label stat--javascript red">{{3 - charMoves.length}} remaining</div>
+    <div id="gameNavTip" ng-show="showTips">Nav Menu</div>
     <div id="gameNav">
       <button ui-sref="home" class="backNav btn">Home</button>
-      <button ui-sref="char" class="backNav btn">Char</button>
-      <button ui-sref="stats" class="backNav btn">Stats</button>
-      <button ng-show="editCompleted" ng-click="setStats()" ui-sref="village" class="backNav main">Go protect the village!</button>
+      <button ui-sref="char" class="backNav btn">Character Select</button>
+      <button ui-sref="stats" class="backNav btn">Subclass Select</button>
+      <button ng-show="editCompleted" ng-click="setStats()" ui-sref="village" class="menuItem blue-bg">Go protect the village!</button>
     </div>
   </div>
 </div>

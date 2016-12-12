@@ -1,17 +1,47 @@
 
-<div id="main" ng-controller="charController">
-  <div id="instruction" ng-show="showTips">Click on the <span class="red">RED </span><span class="reg-text">box to select the character you want.</span></div>
+<div id="main" ng-controller="charController" class="charPage">
+  <div id="instruction" ng-show="showTips"> <span>Choose a character. Proceed with any choice.</span></div>
   <div id="tooltip" ng-show="showNarrative">{{ nextNarrative }}</div>
-  <button id="tooltip-button" ng-click="pickRandom()" ui-sref="stats" ng-show="showNarrative">Pick randomly for me!</button>
-  <div id="charSelect">
-    <div ng-repeat="char in characters" ng-click="charClick(char.type)" class="charBox"><img ng-src="{{char.url}}" class="char char-char"/>
-      <div ui-sref="stats" class="char-select">
-        <p class="char-select__text">Select</p>
-      </div>
+  <div id="charCode" ng-show="(toggleHelpText!=='Okay, I get it')" ng-click="toggleHelp()" class="help-code">{{toggleHelpText}} - ({{conceptCount}}) concepts to review</div>
+  <div id="charCode" ng-show="(toggleHelpText==='Okay, I get it')" ng-click="toggleHelp()" class="help-code darker-red-bg">Okay I understand all ({{conceptCount}}) concepts</div>
+  <div id="charCode" ng-hide="help" class="stat--javascript"> 
+    <div class="title--javascript">Create your character using a JS Object!</div>
+    <div class="init-chartype stat--javascript">>> let <span class="stat--javascript red">myType </span><span class="stat--javascript">= &quot{{chartype}}&quot</span></div>
+    <div class="init-charobject stat--javascript">>> let <span class="stat--javascript red">myChar</span><span class="stat--javascript">= Object.create(</span><span class="stat--javascript red">myType</span><span class="stat--javascript">);</span></div>
+    <div class="init-chardesc stat--javascript">>> console.log(&quotmyChar&quot, <span class="stat--javascript red">myChar</span><span class="stat--javascript">);</span></div>
+    <div class="init-chardesc stat--javascript">
+      <div class="stat--javascript">>> myChar {</div>
+      <div ng-repeat="attribute in attributes" class="stat--javascript tab1">    {{attribute['type']}}: {{attribute[chartype]}}<span ng-show="attribute[chartype]">,</span></div>
+      <div class="stat--javascript tab1">    description: "{{charDescriptions[chartype]}}"</div>
+      <div class="stat--javascript last">}</div>
     </div>
   </div>
+  <div id="charCode" ng-show="help" class="title--javascript">
+    <div class="title--javascript">JS Lesson 1: Creating an Object</div>
+    <div class="description--javascript"> <span class="push1">In this lesson we will declare a type variable</span><span class="push1 green">myType</span><span class="push1">using </span><span class="push1 red">let</span><span class="push1">to store our character type selection.</span><span class="push1">Then we create an object using</span><span class="push1 red">Object.create() </span><span class="push1">on that type.</span><span class="push1 red">console.log() </span><span class="push1">is used to make sure everything looks good!</span></div>
+    <div class="init-chartype comment--javascript charPage">// Declare a variable using "let"</div>
+    <div class="init-chartype stat--javascript">>> let <span class="stat--javascript green">myType </span><span class="stat--javascript ">= &quot{{chartype}}&quot </span></div>
+    <div class="init-chartype comment--javascript charPage">// Make an object instance of selected char. type</div>
+    <div class="init-charobject stat--javascript">>> let <span class="stat--javascript green">myChar</span><span class="stat--javascript"> = Object.create(</span><span class="stat--javascript green">myType</span><span class="stat--javascript">);</span></div>
+    <div class="init-chartype comment--javascript charPage">// Log what is in myChar</div>
+    <div class="init-chardesc stat--javascript">>> console.log(&quotmyChar&quot, <span class="stat--javascript green">myChar</span><span class="stat--javascript">);</span></div>
+    <div class="stat--javascript">>> myChar {</div>
+    <div ng-repeat="attribute in attributes" class="stat--javascript tab1">    {{attribute['type']}}: {{attribute[chartype]}}<span ng-show="attribute[chartype]">,</span><span class="comment--javascript tab1">// derived from {{chartype}} prototype</span></div>
+    <div class="stat--javascript tab1">    description: "{{charDescriptions[chartype]}}"<span class="comment--javascript tab1">// also derived</span></div>
+    <div class="stat--javascript last">}</div>
+    <div class="references">
+      <div class="references__title">References on ({{conceptCount}}) Concepts:</div><a target="_blank" href="http://www.competa.com/blog/2016/08/es6-var-let-const-what-is-the-difference/" title="http://www.competa.com/blog/2016/08/es6-var-let-const-what-is-the-difference/" class="init-chartype link--javascript charPage">Var, Let, and Const</a><a target="_blank" href="https://msdn.microsoft.com/en-us/library/hh696634.aspx#Anchor_3" title="https://msdn.microsoft.com/en-us/library/hh696634.aspx#Anchor_3" class="init-chartype link--javascript charPage">Console.log()</a><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create" class="init-chartype link--javascript charPage">Object.create()</a>
+    </div>
+  </div>
+  <div ui-sref="stats" ng-show="chartype" class="char-select green-bg toggleable--medium">Continue as <span>{{chartype}}</span></div>
+  <div id="charSelect">
+    <div ng-repeat="char in characters" ng-click="charClick(char.type)" ng-class="(chartype === char.type) ? 'selected' : 'notselected'" class="charBox"><img ng-src="{{char.url}}" class="char char-char"/></div>
+  </div>
+  <div ng-show="showTips" class="charSelect__help tipForUser charSelectPage">Choose from above ^ ^ ^</div>
+  <div id="gameNavTip" ng-show="showTips">Nav Menu</div>
   <div id="gameNav">
     <button id="backNav" ui-sref="home" class="btn"> <a ui-sref="home">Home</a></button>
     <button ng-click="toggleShowTips()" class="showTips">{{showTipsText}}</button>
+    <button ng-click="pickRandom()" ui-sref="stats" class="menuItem blue-bg randomBtn">Pick random!</button>
   </div>
 </div>
