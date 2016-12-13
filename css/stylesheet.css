@@ -8385,7 +8385,7 @@ Code Section
 @media screen and (min-width: 1281px) {
   #instruction.editPage {
     font-size: 32px; } }
-@media screen and (max-width: 1280px) {
+@media screen and (max-height: 880px), screen and (max-width: 1280px) {
   .toggle-edit__button, .btn-village {
     margin: -10px 0px; }
 
@@ -9081,7 +9081,7 @@ button {
 .charPage .references {
   margin-top: -5px; }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-height: 880px), screen and (max-width: 1280px) {
   .tipForUser.charSelectPage {
     font-size: 32px; }
 
@@ -9146,9 +9146,15 @@ button {
   bottom: 34%;
   height: 50px;
   text-align: center;
-  padding: 12px;
+  padding: 2px;
   font-size: 18px;
   opacity: 0.3; }
   #conceptsCovered:hover {
     text-decoration: none;
     opacity: 0.9; }
+
+@media screen and (max-height: 880px), screen and (max-width: 1590px) {
+  #instruction.editPage {
+    width: 46% !important;
+    right: 1%;
+    bottom: 0%; } }
