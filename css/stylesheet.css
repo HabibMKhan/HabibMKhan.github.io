@@ -8067,7 +8067,8 @@ a:hover {
   bottom: 180px; }
 
 .char.char-char {
-  width: 100%;
+  width: 60%;
+  margin-left: 20%;
   padding: 20px;
   position: relative;
   bottom: 0; }
@@ -8556,12 +8557,12 @@ Code Section
   margin-top: 15%;
   position: fixed;
   top: 0;
-  width: 21%;
+  width: 17%;
   z-index: 20; }
 
 .enemy.enemy--battle {
   right: 0;
-  width: 30%; }
+  width: 20%; }
 
 .char.char--battle {
   left: 15%; }
@@ -8802,7 +8803,7 @@ input, button {
 
 #witch {
   height: 32%;
-  width: 32%;
+  width: 16%;
   right: 15%;
   top: 30%;
   position: fixed; }
